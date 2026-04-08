@@ -1,0 +1,44 @@
+# render.yaml
+# Place this in the ROOT of your repository.
+# Render reads this file to auto-configure both services.
+
+services:
+  # ── 1. Python ML Service ──────────────────────────────────────────────────
+  - type: web
+    name: estate-ml-service
+    runtime: python
+    rootDir: ml-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: bash render-start.sh
+    plan: free                        # upgrade to starter for always-on
+    healthCheckPath: /health
+    envVars:
+      - key: ML_API_KEY
+        generateValue: true           # Render auto-generates a secret value
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+
+  # ── 2. Node.js API Gateway ────────────────────────────────────────────────
+  - type: web
+    name: estate-api-gateway
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ML_SERVICE_URL
+        fromService:
+          name: estate-ml-service
+          type: web
+          property: host             # Render injects the ML service URL automatically
+      - key: ML_API_KEY
+        fromService:
+          name: estate-ml-service
+          type: web
+          envVarKey: ML_API_KEY      # Same key shared between both services
+      - key: ALLOWED_ORIGIN
+        value: "https://your-app.vercel.app"   # ← UPDATE after Vercel deploy

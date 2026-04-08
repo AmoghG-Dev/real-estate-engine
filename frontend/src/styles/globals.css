@@ -1,0 +1,73 @@
+/* src/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap');
+
+/* ── Design Tokens ─────────────────────────────────────────────────── */
+:root {
+  --bg-base:       #09090f;
+  --bg-surface:    #111118;
+  --bg-raised:     #18181f;
+  --bg-hover:      #21212b;
+
+  --border-subtle: rgba(255,255,255,0.06);
+  --border-mid:    rgba(255,255,255,0.12);
+  --border-accent: rgba(250,204,21,0.45);
+
+  --text-primary:  #f0f0f5;
+  --text-secondary:#9090a8;
+  --text-muted:    #5a5a70;
+
+  --gold:          #fac815;
+  --gold-dim:      rgba(250,200,21,0.15);
+  --gold-glow:     rgba(250,200,21,0.08);
+
+  --emerald:       #34d399;
+  --emerald-dim:   rgba(52,211,153,0.12);
+
+  --rose:          #fb7185;
+  --rose-dim:      rgba(251,113,133,0.12);
+
+  --sky:           #38bdf8;
+  --sky-dim:       rgba(56,189,248,0.12);
+
+  --violet:        #a78bfa;
+
+  --radius-sm:     6px;
+  --radius-md:     12px;
+  --radius-lg:     18px;
+  --radius-xl:     24px;
+
+  --shadow-card:   0 4px 32px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-glow:   0 0 48px rgba(250,200,21,0.12);
+
+  --font-display:  'Clash Display', sans-serif;
+  --font-body:     'DM Sans', sans-serif;
+  --font-mono:     'DM Mono', monospace;
+
+  --transition:    cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Reset ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family:      var(--font-body);
+  background-color: var(--bg-base);
+  color:            var(--text-primary);
+  line-height:      1.6;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(250,200,21,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(52,211,153,0.04) 0%, transparent 60%);
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ── Selection ─────────────────────────────────────────────────────── */
+::selection { background: var(--gold-dim); color: var(--gold); }

@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+ml-service/model/artifacts/
+ml-service/data/housing_data.csv
+
+# Node / JS
+node_modules/
+server/node_modules/
+frontend/node_modules/
+frontend/build/
+.DS_Store
+
+# Env files (keep .env.example and .env.development, ignore secrets)
+.env.local
+.env.production.local
+
+# Docker
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp

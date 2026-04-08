@@ -1,0 +1,245 @@
+/* src/styles/App.module.css */
+
+.app {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+.sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.logoIcon {
+  font-size: 2rem;
+  line-height: 1;
+  background: linear-gradient(135deg, #10b981, #0ea5e9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.logoName {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+.logoSub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+/* ── Main ─────────────────────────────────────────────────────────────────── */
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.75rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+  flex-shrink: 0;
+  height: 56px;
+}
+.tabs { display: flex; gap: 0.15rem; }
+.tab {
+  position: relative;
+  padding: 0.5rem 1.1rem;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+}
+.tab:hover { color: var(--text-secondary); background: var(--surface-1); }
+.tabActive {
+  color: var(--text-primary);
+  background: var(--surface-2);
+}
+.dot {
+  position: absolute;
+  top: 6px; right: 6px;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.topbarRight { display: flex; align-items: center; gap: 0.5rem; }
+.statusDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+.statusText { font-size: 0.75rem; color: var(--text-muted); }
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Error */
+.errorBanner {
+  margin: 1rem 1.75rem 0;
+  padding: 0.8rem 1.1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 10px;
+  font-size: 0.875rem;
+  color: #fca5a5;
+}
+
+/* ── Empty state ──────────────────────────────────────────────────────────── */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 5rem 3rem;
+  min-height: 400px;
+}
+.emptyIcon  { font-size: 3.5rem; margin-bottom: 1.2rem; }
+.emptyTitle {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+.emptyText { font-size: 0.95rem; color: var(--text-secondary); max-width: 440px; line-height: 1.65; }
+.emptyBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.emptyBadges span {
+  font-size: 0.73rem;
+  font-weight: 600;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Loading ──────────────────────────────────────────────────────────────── */
+.loadingState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.loadingPulse {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Tabs content ──────────────────────────────────────────────────────────── */
+.valuationTab   { }
+.marketTab      { padding: 1.75rem; display: flex; flex-direction: column; gap: 1.25rem; }
+.comparablesTab { padding: 1.75rem; }
+
+.marketHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.marketTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.nbSelect {
+  appearance: none;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Feature importance */
+.importanceCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.importanceTitle {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin: 0;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+}
+.importanceList { display: flex; flex-direction: column; }
+.importanceItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1.4rem;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+}
+.importanceItem:last-child  { border-bottom: none; }
+.importanceItem:hover       { background: var(--surface-2); }
+.impRank  { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-muted); width: 28px; flex-shrink: 0; }
+.impLabel { flex: 1; font-size: 0.88rem; color: var(--text-secondary); text-transform: capitalize; }
+.impCoef  { font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; color: var(--accent); }

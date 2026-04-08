@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  # ── Python ML Service ────────────────────────────────────────────────────────
+  ml-service:
+    build:
+      context: ./ml-service
+      dockerfile: Dockerfile
+    container_name: estate-ml
+    env_file: .env.example
+    ports:
+      - "5001:5001"
+    volumes:
+      - ml-artifacts:/app/model/artifacts
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - estate-net
+
+  # ── Node.js API Gateway ──────────────────────────────────────────────────────
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: estate-api
+    env_file: .env.example
+    ports:
+      - "4000:4000"
+    environment:
+      ML_SERVICE_URL: http://ml-service:5001
+    depends_on:
+      ml-service:
+        condition: service_healthy
+    networks:
+      - estate-net
+
+  # ── React Frontend ───────────────────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: estate-ui
+    ports:
+      - "3000:80"
+    depends_on:
+      - server
+    networks:
+      - estate-net
+
+volumes:
+  ml-artifacts:
+
+networks:
+  estate-net:
+    driver: bridge

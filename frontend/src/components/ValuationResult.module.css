@@ -1,0 +1,154 @@
+/* src/components/ValuationResult.module.css */
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: fadeSlideIn 0.45s ease forwards;
+}
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero price */
+.heroCard {
+  background: linear-gradient(145deg, var(--accent-subtle), var(--surface-2));
+  border-bottom: 1px solid var(--border);
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+.heroLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+.heroPrice {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 0.8rem;
+}
+.heroBadge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.3rem 0.9rem;
+  border-radius: 20px;
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.03em;
+}
+
+/* Confidence interval */
+.ciRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 0.85rem;
+}
+.ciItem {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+.ciDivider { width: 1px; background: var(--border); align-self: stretch; }
+.ciLabel { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); }
+.ciVal { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--text-primary); }
+
+.accuracy {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* Section */
+.section {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 1.2rem 0;
+}
+
+/* Impact bars */
+.impacts { display: flex; flex-direction: column; gap: 0.75rem; }
+.impactRow {
+  display: grid;
+  grid-template-columns: 130px 1fr 90px;
+  align-items: center;
+  gap: 0.75rem;
+}
+.impactLabel { font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.impactBarWrap {
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.impactBar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.impactPos { background: linear-gradient(90deg, #10b981, #34d399); }
+.impactNeg { background: linear-gradient(90deg, #ef4444, #f87171); }
+.impactVal {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: right;
+}
+.pos { color: #10b981; }
+.neg { color: #ef4444; }
+
+/* Summary grid */
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+}
+.summaryKey {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.summaryVal {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+  padding: 0.9rem 1.75rem;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}

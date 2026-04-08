@@ -1,0 +1,45 @@
+/* src/styles/global.css */
+
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;600;700&display=swap");
+
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+:root {
+  --font-display: "Syne",      sans-serif;
+  --font-body:    "DM Sans",   sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  /* Dark colour system */
+  --bg-app:      #080c10;
+  --bg-sidebar:  #0b1018;
+  --bg-card:     #0f1620;
+  --surface-1:   #131c28;
+  --surface-2:   #1a2535;
+  --border:      rgba(255, 255, 255, 0.07);
+
+  --accent:       #10b981;
+  --accent-glow:  rgba(16, 185, 129, 0.25);
+  --accent-subtle: rgba(16, 185, 129, 0.08);
+
+  --text-primary:   #f0f6fc;
+  --text-secondary: #94a3b8;
+  --text-muted:     #4e6580;
+
+  /* Scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-2) transparent;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar       { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--surface-2); border-radius: 3px; }
