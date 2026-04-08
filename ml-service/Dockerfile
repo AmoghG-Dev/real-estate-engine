@@ -12,4 +12,4 @@ RUN python -c "from data.generate_data import generate_housing_data; generate_ho
     python -c "from model.train import train; train()"
 
 EXPOSE 5001
-CMD ["sh", "-c", "gunicorn -w 2 -t 120 -b 0.0.0.0:$PORT app:app"]
+CMD ["sh", "-c", "gunicorn -w 1 -t 120 -b 0.0.0.0:$PORT app:app"]
