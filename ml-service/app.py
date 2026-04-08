@@ -11,7 +11,16 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from model.predict import NEIGHBORHOODS, PredictionEngine
-engine = PredictionEngine.get()
+
+engine = None
+
+def get_engine():
+    global engine
+    if engine is None:
+        log.info("Loading ML model...")
+        engine = PredictionEngine.get()
+        log.info("Model loaded")
+    return engine
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -52,6 +61,7 @@ def predict():
         return jsonify({"error": f"Missing fields: {missing}"}), 422
 
     try:
+        engine = get_engine()
         result = engine.predict(data)
         return jsonify(result)
     except Exception as exc:
@@ -64,7 +74,8 @@ def predict():
 @require_key
 def market_trends():
     neighborhood = request.args.get("neighborhood")
-    trends       = engine.market_trends(neighborhood)
+    engine = get_engine()
+    trends = engine.market_trends(neighborhood)
     return jsonify({"neighborhood": neighborhood or "All", "trends": trends})
 
 
@@ -74,7 +85,8 @@ def market_trends():
 def comparables():
     neighborhood = request.args.get("neighborhood", "Midtown")
     price        = float(request.args.get("price", 500_000))
-    comps        = engine.comparables(neighborhood, price)
+    engine = get_engine()
+    trends = engine.market_trends(neighborhood)
     return jsonify({"comparables": comps})
 
 
@@ -82,6 +94,8 @@ def comparables():
 @app.get("/model/importance")
 @require_key
 def feature_importance():
+    engine = get_engine()
+
     return jsonify({
         "feature_importance": engine.report.get("feature_importance", {}),
         "model_metrics":      engine.report.get("all_results", {}),
