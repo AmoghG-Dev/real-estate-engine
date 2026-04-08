@@ -101,15 +101,15 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=port)
 
 
-def _bootstrap():
-    from pathlib import Path
-    model_path = Path(__file__).parent / "model" / "artifacts" / "model.pkl"
-    if not model_path.exists():
-        log.info("No trained model — bootstrapping...")
-        from data.generate_data import generate_housing_data
-        generate_housing_data()
-        from model.train import train
-        train()
+# def _bootstrap():
+#     from pathlib import Path
+#     model_path = Path(__file__).parent / "model" / "artifacts" / "model.pkl"
+#     if not model_path.exists():
+#         log.info("No trained model — bootstrapping...")
+#         from data.generate_data import generate_housing_data
+#         generate_housing_data()
+#         from model.train import train
+#         train()
 
-# Bootstrap runs at import time so gunicorn workers also train on first deploy
-_bootstrap()
+# # Bootstrap runs at import time so gunicorn workers also train on first deploy
+# _bootstrap()
