@@ -296,3 +296,5 @@ npm test
 | API   | express-validator, helmet, morgan | Validation, security, logging |
 | UI    | React 18, CSS Modules | Component-based SPA |
 | Infra | Docker, Docker Compose, Nginx | Containerisation & serving |
+
+Live on :- https://frontend-service-black.vercel.app/
