@@ -7,7 +7,7 @@ const logger = require("../middleware/logger");
 const mlClient = axios.create({
   baseURL: config.mlServiceUrl,
   headers: { "X-API-Key": config.mlApiKey, "Content-Type": "application/json" },
-  timeout: 15_000,
+  timeout: 45000,
 });
 
 // POST /api/valuation
@@ -34,7 +34,17 @@ const getValuation = async (req, res, next) => {
       walk_score: Number(walk_score),
     };
 
-    const { data } = await mlClient.post("/predict", payload);
+    let data;
+
+try {
+  const res1 = await mlClient.post("/predict", payload);
+  data = res1.data;
+} catch (err) {
+  logger.warn(`[${requestId}] First attempt failed, retrying...`);
+
+  const res2 = await mlClient.post("/predict", payload);
+  data = res2.data;
+}
 
     logger.info(`[${requestId}] Valuation complete: $${data.estimated_value?.toLocaleString()}`);
 
@@ -47,7 +57,11 @@ const getValuation = async (req, res, next) => {
     });
   } catch (err) {
     logger.error(`[${requestId}] Valuation failed: ${err.message}`);
-    next(err);
+    res.status(500).json({
+  success: false,
+  requestId,
+  error: "Valuation failed. ML service may be warming up.",
+});
   }
 };
 
@@ -57,7 +71,10 @@ const getNeighborhoods = async (req, res, next) => {
     const { data } = await mlClient.get("/neighborhoods");
     res.json({ success: true, ...data });
   } catch (err) {
-    next(err);
+    return res.status(500).json({
+    success: false,
+    error: "Failed to fetch neighborhoods",
+  });
   }
 };
 
